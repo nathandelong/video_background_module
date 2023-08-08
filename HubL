@@ -1,0 +1,47 @@
+<video id="background_video" autoplay loop muted>
+<source src="{{ module.Video_URL}}" type="video/mp4">
+</video>
+
+<video_head>{% inline_text field="Heading_1" value="{{ module.Heading_1 }}" %}</video_head>
+<video_subhead>{% inline_text field="Heading_2" value="{{ module.Heading_2 }}" %}</video_subhead>
+
+{# note: since we need to pull in our text colors from this module's fields, the CSS needs to be included between <style> </style> tags here in the HTML #}
+
+<style>
+#background_video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+video_head, video_subhead {
+
+  color: {{ module.text_color.color }};
+  opacity: {{ module.text_color.opacity / 100 }};
+  font-family: Arial;
+  font-weight: bold;
+  text-align: center;
+}
+
+video_head {
+  font-size: 6rem;
+  margin-top: 30vh;
+}
+
+video_subhead { font-size: 3rem; }
+
+  @media (max-width: 750px) {
+    #background_video { display: none; }
+    body {
+      background: url("{{ module.still_image_url }}") repeat;
+      background-size: 100vh cover;
+    }
+}
+  
+</style>
